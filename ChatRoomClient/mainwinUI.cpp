@@ -1,5 +1,5 @@
 #include "mainwin.h"
-
+#include "LoginDialog.h"
 
 void MainWin::initMsgGrpBx()
 {
@@ -54,6 +54,7 @@ MainWin::MainWin(QWidget *parent)
         initMsgGrpBx();
         initInputBx();
 
+        //设置Mainwin布局
         vMainLayout.setSpacing(10);
         vMainLayout.addWidget(&msgGrpBx);
         vMainLayout.addWidget(&inputGrpBx);
@@ -61,9 +62,25 @@ MainWin::MainWin(QWidget *parent)
         setWindowTitle("Zeki's ChatRoom");
         setLayout(&vMainLayout);
         setMinimumSize(550,400);
+
+        connect(&sendBtn, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
+        connect(&logInOutBtn, SIGNAL(clicked()), this, SLOT(logInOutBtnClicked()));
 }
 
 MainWin::~MainWin()
 {
 
+}
+
+void MainWin::sendBtnClicked()
+{
+
+}
+
+void MainWin::logInOutBtnClicked()
+{
+    LoginDialog ld(this);
+    if ( ld.exec() == QDialog::Accepted ) {
+
+    }
 }

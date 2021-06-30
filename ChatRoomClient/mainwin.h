@@ -2,6 +2,7 @@
 #define MAINWIN_H
 
 #include <QWidget>
+#include <QDebug>
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QPlainTextEdit>
@@ -28,6 +29,9 @@ class MainWin : public QWidget
 public:
     MainWin(QWidget *parent = nullptr);
     ~MainWin();
+private slots:
+    void sendBtnClicked();
+    void logInOutBtnClicked();
 };
 
 #endif // MAINWIN_H
