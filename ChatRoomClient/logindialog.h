@@ -7,7 +7,9 @@
 #include <QLineEdit>
 #include <QPainter>
 #include <QTimer>
+#include <QTime>
 #include <QMessageBox>
+#include "databasedemo.h"
 
 class LoginDialog : public QDialog
 {
@@ -30,6 +32,9 @@ private:
     QString m_Captcha;
     Qt::GlobalColor* m_Color;
     QTimer m_Timer;
+
+    DataBaseDemo db;
+
 public:
     LoginDialog(QWidget *parent = nullptr);
 

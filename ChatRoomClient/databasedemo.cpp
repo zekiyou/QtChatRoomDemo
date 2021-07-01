@@ -26,8 +26,7 @@ void DataBaseDemo::initDataBase()
         qDebug() << "Table created!";
     }
 
-    insertUser("yzq","123456");
-    insertUser("YZQ","123456");
+
 }
 
 bool DataBaseDemo::searchUserData(QString user, QString pwd)

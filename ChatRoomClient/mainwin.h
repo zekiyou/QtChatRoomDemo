@@ -20,7 +20,7 @@ class MainWin : public QWidget
     QGroupBox inputGrpBx;
     QPlainTextEdit msgEditor;
     QLineEdit inputEditor;
-    QPushButton logInOutBtn;
+    //QPushButton logInOutBtn;
     QPushButton sendBtn;
     QLabel statusLb1;
 
@@ -28,10 +28,11 @@ class MainWin : public QWidget
     void initInputBx();
 public:
     MainWin(QWidget *parent = nullptr);
+    void setInputGrpBxTitle(QString userName);
     ~MainWin();
 private slots:
     void sendBtnClicked();
-    void logInOutBtnClicked();
+    //void logInOutBtnClicked();
 };
 
 #endif // MAINWIN_H

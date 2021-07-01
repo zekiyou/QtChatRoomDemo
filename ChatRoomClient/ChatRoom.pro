@@ -27,9 +27,9 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     mainwinUI.cpp \
-    LoginDialog.cpp \
     clientdemo.cpp \
-    databasedemo.cpp
+    databasedemo.cpp \
+    logindialog.cpp
 
 HEADERS += \
         mainwin.h \

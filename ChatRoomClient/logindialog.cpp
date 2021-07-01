@@ -1,5 +1,4 @@
 #include "logindialog.h"
-#include <QTime>
 
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
@@ -143,11 +142,13 @@ void LoginDialog::loginBtn_Clicked()
             QMessageBox::critical(this,"ERROR","密码为空");
             m_Captcha = getCaptcha();
         }
-
-        else  {
+        else if(db.searchUserData(m_User,m_Pwd)) {
 
             done(Accepted);
-
+        }
+        else {
+            QMessageBox::critical(this,"ERROR","账号信息错误");
+            m_Captcha = getCaptcha();
         }
 
     }
