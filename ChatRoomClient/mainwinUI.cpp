@@ -1,5 +1,5 @@
 #include "mainwin.h"
-#include "LoginDialog.h"
+#include "logindialog.h"
 
 void MainWin::initMsgGrpBx()
 {
@@ -26,7 +26,7 @@ void MainWin::initInputBx()
     gl->addWidget(&sendBtn, 1, 4);
 
     //未登陆之前 LineEdit不可用
-    inputEditor.setFixedHeight(23);
+    inputEditor.setFixedHeight(30);
     inputEditor.setEnabled(false);
 
     //未登陆之前 status1为未登录
@@ -74,13 +74,16 @@ MainWin::~MainWin()
 
 void MainWin::sendBtnClicked()
 {
-
+    inputEditor.clear();
 }
 
 void MainWin::logInOutBtnClicked()
 {
     LoginDialog ld(this);
     if ( ld.exec() == QDialog::Accepted ) {
-
+        sendBtn.setEnabled(true);
+        inputEditor.setEnabled(true);
+        inputGrpBx.setTitle(ld.getUser());
+        statusLb1.setText("状态:已登陆");
     }
 }

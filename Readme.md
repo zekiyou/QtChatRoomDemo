@@ -14,5 +14,6 @@ QtCharRoomDemo用于总结和使用一些需要学习的模块，在实际项目
 
 - [ ] TCP/IP (聊天室基于Socket方式完成信息传送)
 
+- [x] QSQLITE (用户名密码使用QT+SQLITE来存储)
   
 
