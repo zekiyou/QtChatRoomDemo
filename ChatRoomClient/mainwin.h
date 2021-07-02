@@ -10,6 +10,8 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QGridLayout>
+#include "clientdemo.h"
+#include "serverdemo.h"
 
 class MainWin : public QWidget
 {
@@ -23,12 +25,16 @@ class MainWin : public QWidget
     //QPushButton logInOutBtn;
     QPushButton sendBtn;
     QLabel statusLb1;
+    QString username;
+
+    ClientDemo m_Client;
+    ServerDemo m_Server;
 
     void initMsgGrpBx();
     void initInputBx();
 public:
     MainWin(QWidget *parent = nullptr);
-    void setInputGrpBxTitle(QString userName);
+    void setUsername(QString username);
     ~MainWin();
 private slots:
     void sendBtnClicked();

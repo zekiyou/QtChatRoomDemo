@@ -64,11 +64,16 @@ MainWin::MainWin(QWidget *parent)
 
         connect(&sendBtn, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
         //connect(&logInOutBtn, SIGNAL(clicked()), this, SLOT(logInOutBtnClicked()));
+
+        m_Client.connectTo("127.0.0.1",8080);
+        m_Server.start(8081);
+
 }
 
-void MainWin::setInputGrpBxTitle(QString userName)
+void MainWin::setUsername(QString username)
 {
-    inputGrpBx.setTitle(userName);
+    this->username = username;
+    inputGrpBx.setTitle(username);
 }
 
 MainWin::~MainWin()
@@ -78,6 +83,7 @@ MainWin::~MainWin()
 
 void MainWin::sendBtnClicked()
 {
+    m_Client.send(inputEditor.text().toLatin1().data(),inputEditor.text().size());
     inputEditor.clear();
 }
 

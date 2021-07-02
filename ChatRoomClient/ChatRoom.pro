@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,13 +29,15 @@ SOURCES += \
     mainwinUI.cpp \
     clientdemo.cpp \
     databasedemo.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    serverdemo.cpp
 
 HEADERS += \
         mainwin.h \
     clientdemo.h \
     logindialog.h \
-    databasedemo.h
+    databasedemo.h \
+    serverdemo.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

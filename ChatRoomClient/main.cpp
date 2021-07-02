@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "databasedemo.h"
 #include "logindialog.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -10,8 +11,9 @@ int main(int argc, char *argv[])
 
     if ( ld.exec() == QDialog::Accepted ) {
         MainWin* w = new MainWin;
+        w->setUsername(ld.getUser());
         w->show();
-        w->setInputGrpBxTitle(ld.getUser());
+
     }
 
     return a.exec();
