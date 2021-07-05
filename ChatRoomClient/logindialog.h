@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QTime>
 #include <QMessageBox>
+#include <QPropertyAnimation>
 #include "databasedemo.h"
 
 class LoginDialog : public QDialog

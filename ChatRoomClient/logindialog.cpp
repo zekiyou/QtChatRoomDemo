@@ -56,6 +56,13 @@ LoginDialog::LoginDialog(QWidget *parent)
     m_Color = getColor();
 
     m_Timer.start(100);
+
+    QPropertyAnimation *animation = new QPropertyAnimation(this, "windowOpacity");
+    animation->setDuration(1000);
+    animation->setStartValue(0);
+    animation->setEndValue(1);
+    animation->start();
+
 }
 
 LoginDialog::~LoginDialog()
@@ -143,7 +150,6 @@ void LoginDialog::loginBtn_Clicked()
             m_Captcha = getCaptcha();
         }
         else if(db.searchUserData(m_User,m_Pwd)) {
-
             done(Accepted);
         }
         else {
