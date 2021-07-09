@@ -1,6 +1,6 @@
 ### Readme
 
-QtCharRoomDemo用于总结和使用一些需要学习的模块，在实际项目中来熟悉和使用
+QtChatRoomDemo用于总结和使用一些需要学习的模块，在实际项目中来熟悉和使用
 
 - [x] Git的使用  （已同步至GitLab仓库）
 
@@ -16,4 +16,14 @@ QtCharRoomDemo用于总结和使用一些需要学习的模块，在实际项目
 
 - [x] QSQLITE (用户名密码使用QT+SQLITE来存储)
   
+
+
+
+QtChatRoomDemo 数据库中默认提供3个用户供以最初登陆使用，登陆过后可以通过admin管理员账号添加新用户
+
+| Username | Password |
+| :------: | :------: |
+|   test   |  123456  |
+|  admin   |  123456  |
+|  guest   |  123456  |
 
