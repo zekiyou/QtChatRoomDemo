@@ -19,6 +19,7 @@ void DataBaseDemo::initDataBase()
 
     //创建表格
     QSqlQuery sql_query(db);
+
     if (!sql_query.exec("create table User(Username varchar(20), Password varchar(20))")) {
         qDebug() << "Error: Fail to create table.";
     }
@@ -26,6 +27,12 @@ void DataBaseDemo::initDataBase()
         qDebug() << "Table created!";
     }
 
+    if(!sql_query.exec("select * from User where Username = test")){
+        insertUser("test", "123456");
+        insertUser("admin","123456");
+        insertUser("guest","123456");
+        qDebug() << "Init Table successfully" ;
+    }
 
 }
 
