@@ -3,6 +3,7 @@
 #include <QTcpSocket>
 #include <QObjectList>
 #include <QDebug>
+#include <QString>
 
 ServerDemo::ServerDemo(QObject* parent) : QObject(parent), m_handler(nullptr)
 {
@@ -20,6 +21,14 @@ void ServerDemo::onNewConnection()
     connect(tcp, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
     connect(tcp, SIGNAL(readyRead()), this, SLOT(onDataReady()));
     connect(tcp, SIGNAL(bytesWritten(qint64)), this, SLOT(onBytesWritten(qint64)));
+
+    if (m_handler != nullptr){
+
+        TextMessage msg("CONN", tcp->peerAddress().toString() + ":" + QString::number(tcp->peerPort()));
+
+        m_handler->handle(*tcp,msg);
+    }
+
 }
 
 void ServerDemo::onConnected()
@@ -35,6 +44,14 @@ void ServerDemo::onDisconnected()
     {
         delete m_map.take(tcp);
     }
+
+    if (m_handler != nullptr){
+
+        TextMessage msg("DSCN", "");
+
+        m_handler->handle(*tcp,msg);
+    }
+
 }
 
 void ServerDemo::onDataReady()

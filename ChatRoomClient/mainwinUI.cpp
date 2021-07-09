@@ -47,11 +47,28 @@ void MainWin::initInputBx()
 
 }
 
+void MainWin::initMember()
+{
+    m_Client.setHandler(this);
+}
+
+void MainWin::initConnect()
+{
+    if (m_Client.connectTo("127.0.0.1",8080)) {
+        TextMessage tm("Test","MyTestMessage");
+        m_Client.send(tm);
+    } else {
+        QMessageBox::critical(this,"Error","无法连接服务器");
+    }
+}
+
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
 {
+        initConnect();
         initMsgGrpBx();
         initInputBx();
+        initMember();
 
         //设置Mainwin布局
         vMainLayout.setSpacing(10);
@@ -64,13 +81,17 @@ MainWin::MainWin(QWidget *parent)
 
         connect(&sendBtn, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
         //connect(&logInOutBtn, SIGNAL(clicked()), this, SLOT(logInOutBtnClicked()));
-        m_Server.start(8081);
 }
 
 void MainWin::setUsername(QString username)
 {
     this->username = username;
     inputGrpBx.setTitle(username);
+}
+
+void MainWin::handle(QTcpSocket &obj, TextMessage &message)
+{
+
 }
 
 MainWin::~MainWin()
@@ -80,8 +101,6 @@ MainWin::~MainWin()
 
 void MainWin::sendBtnClicked()
 {
-    m_Client.connectTo("127.0.0.1",8080);
-    m_Client.send(inputEditor.text().toLatin1().data(),inputEditor.text().size());
     inputEditor.clear();
 }
 

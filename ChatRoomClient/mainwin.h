@@ -6,14 +6,16 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QPlainTextEdit>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QLabel>
 #include <QGridLayout>
 #include "clientdemo.h"
 #include "serverdemo.h"
+#include "txtmsghandler.h"
 
-class MainWin : public QWidget
+class MainWin : public QWidget, public TxtMsgHandler
 {
     Q_OBJECT
 
@@ -32,9 +34,13 @@ class MainWin : public QWidget
 
     void initMsgGrpBx();
     void initInputBx();
+    void initMember();
+    void initConnect();
+
 public:
     MainWin(QWidget *parent = nullptr);
     void setUsername(QString username);
+    void handle(QTcpSocket& obj, TextMessage& message);
     ~MainWin();
 private slots:
     void sendBtnClicked();

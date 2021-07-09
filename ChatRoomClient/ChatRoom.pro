@@ -30,14 +30,19 @@ SOURCES += \
     clientdemo.cpp \
     databasedemo.cpp \
     logindialog.cpp \
-    serverdemo.cpp
+    serverdemo.cpp \
+    textmessage.cpp \
+    txtmsgassembler.cpp
 
 HEADERS += \
         mainwin.h \
     clientdemo.h \
     logindialog.h \
     databasedemo.h \
-    serverdemo.h
+    serverdemo.h \
+    textmessage.h \
+    txtmsgassembler.h \
+    txtmsghandler.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

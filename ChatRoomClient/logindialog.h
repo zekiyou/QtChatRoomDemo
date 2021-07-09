@@ -10,6 +10,7 @@
 #include <QTime>
 #include <QMessageBox>
 #include <QPropertyAnimation>
+#include <QCloseEvent>
 #include "databasedemo.h"
 
 class LoginDialog : public QDialog
@@ -47,7 +48,7 @@ public:
     Qt::GlobalColor* getColor();
 protected:
     void paintEvent(QPaintEvent *);
-
+    void closeEvent(QCloseEvent *);
 private slots:
     void loginBtn_Clicked();
     void cancelBtn_Clicked();

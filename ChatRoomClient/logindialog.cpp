@@ -1,5 +1,4 @@
 #include "logindialog.h"
-
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
     , userLabel(this)
@@ -129,6 +128,11 @@ void LoginDialog::paintEvent(QPaintEvent *)
 
 }
 
+void LoginDialog::closeEvent(QCloseEvent *)
+{
+    exit(0);
+}
+
 void LoginDialog::loginBtn_Clicked()
 {
 
@@ -173,5 +177,5 @@ void LoginDialog::cancelBtn_Clicked()
 void LoginDialog::timer_Timerout()
 {
     m_Color = getColor();
-    update();
+    //update();
 }

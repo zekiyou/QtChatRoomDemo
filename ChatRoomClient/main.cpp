@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     LoginDialog ld;
 
     if ( ld.exec() == QDialog::Accepted ) {
+
         MainWin* w = new MainWin;
         w->setUsername(ld.getUser());
         w->show();

@@ -16,7 +16,7 @@ class ServerDemo : public QObject
     QMap<QTcpSocket*, TxtMsgAssembler*> m_map;
     TxtMsgHandler* m_handler;
 public:
-    ServerDemo(QObject* parent = NULL);
+    ServerDemo(QObject* parent = nullptr);
     bool start(int port);
     void stop();
     void setHandler(TxtMsgHandler* handler);
