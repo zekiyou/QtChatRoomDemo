@@ -32,11 +32,18 @@ void ClientDemo::onDataReady()
 
     while( (len = static_cast<int>(m_client.read(buf, sizeof(buf)))) > 0 )
     {
-        QSharedPointer<TextMessage> ptm = m_assembler.assemble(buf, len);
+        QSharedPointer<TextMessage> ptm = nullptr;
 
-        if( (ptm != nullptr) && (m_handler != nullptr) )
-        {
-            m_handler->handle(m_client, *ptm);
+        m_assembler.prepare(buf,len);
+
+        while ((ptm = m_assembler.assemble()) != nullptr) {
+
+            if (m_handler != nullptr){
+
+                m_handler->handle(m_client,*ptm);
+
+            }
+
         }
     }
 }
@@ -67,6 +74,11 @@ qint64 ClientDemo::available()
 void ClientDemo::close()
 {
     m_client.close();
+}
+
+bool ClientDemo::isValid()
+{
+    return m_client.isValid();
 }
 
 void ClientDemo::setHandler(TxtMsgHandler* handler)

@@ -24,6 +24,7 @@ public:
     qint64 available();
     void setHandler(TxtMsgHandler* handler);
     void close();
+    bool isValid();
 
 private slots:
     void onConnected();

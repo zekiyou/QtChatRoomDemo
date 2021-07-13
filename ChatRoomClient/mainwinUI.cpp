@@ -55,8 +55,10 @@ void MainWin::initMember()
 void MainWin::initConnect()
 {
     if (m_Client.connectTo("127.0.0.1",8080)) {
-        TextMessage tm("Test","MyTestMessage");
+
+        TextMessage tm("LGIN", usr+'\r'+pwd );
         m_Client.send(tm);
+
     } else {
         QMessageBox::critical(this,"Error","无法连接服务器");
     }
@@ -65,7 +67,7 @@ void MainWin::initConnect()
 MainWin::MainWin(QWidget *parent)
     : QWidget(parent)
 {
-        initConnect();
+
         initMsgGrpBx();
         initInputBx();
         initMember();
@@ -81,16 +83,33 @@ MainWin::MainWin(QWidget *parent)
 
         connect(&sendBtn, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
         //connect(&logInOutBtn, SIGNAL(clicked()), this, SLOT(logInOutBtnClicked()));
+
 }
 
 void MainWin::setUsername(QString username)
 {
-    this->username = username;
+    this->usr = username;
     inputGrpBx.setTitle(username);
+}
+
+void MainWin::setPassword(QString password)
+{
+    this->pwd = password;
 }
 
 void MainWin::handle(QTcpSocket &obj, TextMessage &message)
 {
+    if (message.type() == "CONN" ) {
+
+    } else if ( message.type() == "DSCN" ) {
+
+    } else if (message.type() == "LIOK") {
+        QMessageBox::critical(this,"OK","已连接服务器");
+    } else if (message.type() == "LIER") {
+        QMessageBox::critical(this,"ERROR","未连接服务器");
+    } else if (message.type() == "MSGA") {
+        msgEditor.appendPlainText(message.data());
+    }
 
 }
 
@@ -101,6 +120,11 @@ MainWin::~MainWin()
 
 void MainWin::sendBtnClicked()
 {
-    inputEditor.clear();
+
+    QString text = inputGrpBx.title() + "  " + QTime::currentTime().toString("HH:mm:ss") + "\n" + "  " + inputEditor.text() + "\n" ;
+    TextMessage tm("MSGA",text);
+
+    if (m_Client.send(tm))
+        inputEditor.clear();
 }
 

@@ -4,17 +4,26 @@
 #include "txtmsghandler.h"
 #include "textmessage.h"
 #include <QList>
+#include <QMap>
+#include <QTcpSocket>
+#include <QTcpServer>
 
 class ServerHandler : public TxtMsgHandler
 {
 
-    struct Node{
+    typedef void(ServerHandler::*MSGHandler)(QTcpSocket&, TextMessage&);
+
+    struct Node {
         QString id;
         QString pwd;
         QTcpSocket* socket;
+    public:
+        Node() : id(""),pwd(""),socket(nullptr) {
+
+        }
     };
 
-    QList<Node> m_nodeList;
+    QList<Node*> m_nodeList;
 
 public:
     ServerHandler();

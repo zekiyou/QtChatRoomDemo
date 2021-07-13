@@ -177,5 +177,5 @@ void LoginDialog::cancelBtn_Clicked()
 void LoginDialog::timer_Timerout()
 {
     m_Color = getColor();
-    update();
+    //update();
 }

@@ -13,6 +13,8 @@ int main(int argc, char *argv[])
 
         MainWin* w = new MainWin;
         w->setUsername(ld.getUser());
+        w->setPassword(ld.getPwd());
+        w->initConnect();
         w->show();
 
     }

@@ -8,6 +8,7 @@
 #include <QPlainTextEdit>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QTime>
 #include <QLineEdit>
 #include <QLabel>
 #include <QGridLayout>
@@ -27,7 +28,8 @@ class MainWin : public QWidget, public TxtMsgHandler
     //QPushButton logInOutBtn;
     QPushButton sendBtn;
     QLabel statusLb1;
-    QString username;
+    QString usr;
+    QString pwd;
 
     ClientDemo m_Client;
     ServerDemo m_Server;
@@ -35,12 +37,14 @@ class MainWin : public QWidget, public TxtMsgHandler
     void initMsgGrpBx();
     void initInputBx();
     void initMember();
-    void initConnect();
+
 
 public:
     MainWin(QWidget *parent = nullptr);
     void setUsername(QString username);
+    void setPassword(QString password);
     void handle(QTcpSocket& obj, TextMessage& message);
+    void initConnect();
     ~MainWin();
 private slots:
     void sendBtnClicked();

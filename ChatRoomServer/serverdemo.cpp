@@ -66,11 +66,19 @@ void ServerDemo::onDataReady()
 
         while( (len = static_cast<int>(tcp->read(buf, sizeof(buf)))) > 0 )
         {
-            QSharedPointer<TextMessage> ptm = (assembler != nullptr) ? assembler->assemble(buf, len) : nullptr;
 
-            if( (ptm != nullptr) && (m_handler != nullptr) )
-            {
-                m_handler->handle(*tcp, *ptm);
+            if ( assembler != nullptr){
+
+                 QSharedPointer<TextMessage> ptm = nullptr;
+
+                 assembler->prepare(buf,len);
+
+                 while ( (ptm = assembler->assemble()) != nullptr) {
+
+                     m_handler->handle(*tcp, *ptm);
+
+                 }
+
             }
         }
     }
