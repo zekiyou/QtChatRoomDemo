@@ -52,6 +52,12 @@ void MainWin::initMember()
     m_Client.setHandler(this);
 }
 
+void MainWin::initUserList()
+{
+    listWidget.setFixedWidth(150);
+    listWidget.setFocusPolicy(Qt::NoFocus);
+}
+
 void MainWin::initConnect()
 {
     if (m_Client.connectTo("127.0.0.1",8080)) {
@@ -71,15 +77,20 @@ MainWin::MainWin(QWidget *parent)
         initMsgGrpBx();
         initInputBx();
         initMember();
+        initUserList();
 
         //设置Mainwin布局
         vMainLayout.setSpacing(10);
         vMainLayout.addWidget(&msgGrpBx);
         vMainLayout.addWidget(&inputGrpBx);
 
+        QHBoxLayout* hbl =new QHBoxLayout;
+        hbl->addWidget(&listWidget);
+        hbl->addLayout(&vMainLayout);
+
         setWindowTitle("Zeki's ChatRoom");
-        setLayout(&vMainLayout);
-        setMinimumSize(550,400);
+        setLayout(hbl);
+        setMinimumSize(650,500);
 
         connect(&sendBtn, SIGNAL(clicked()), this, SLOT(sendBtnClicked()));
         //connect(&logInOutBtn, SIGNAL(clicked()), this, SLOT(logInOutBtnClicked()));
@@ -109,6 +120,23 @@ void MainWin::handle(QTcpSocket &obj, TextMessage &message)
         QMessageBox::critical(this,"ERROR","未连接服务器");
     } else if (message.type() == "MSGA") {
         msgEditor.appendPlainText(message.data());
+    } else if (message.type() == "USER") {
+        QStringList users = message.data().split("\r",QString::SkipEmptyParts);
+
+        listWidget.clear();
+
+        for (int i=0; i<users.length(); i++) {
+
+            QListWidgetItem* item = new QListWidgetItem;
+
+            if (item !=nullptr){
+                item->setText(users[i]);
+                item->setCheckState(Qt::Unchecked);
+                listWidget.addItem(item);
+            }
+
+        }
+
     }
 
 }

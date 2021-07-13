@@ -25,6 +25,9 @@ class ServerHandler : public TxtMsgHandler
 
     QList<Node*> m_nodeList;
 
+    QString getOnlineUserId();
+    void sendToAllOnlineUser(TextMessage& tm);
+
 public:
     ServerHandler();
     void handle(QTcpSocket& obj, TextMessage& message);

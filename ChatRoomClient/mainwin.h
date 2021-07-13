@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QTime>
 #include <QLineEdit>
+#include <QListWidget>
 #include <QLabel>
 #include <QGridLayout>
 #include "clientdemo.h"
@@ -24,6 +25,7 @@ class MainWin : public QWidget, public TxtMsgHandler
     QGroupBox msgGrpBx;
     QGroupBox inputGrpBx;
     QPlainTextEdit msgEditor;
+    QListWidget listWidget;
     QLineEdit inputEditor;
     //QPushButton logInOutBtn;
     QPushButton sendBtn;
@@ -37,6 +39,7 @@ class MainWin : public QWidget, public TxtMsgHandler
     void initMsgGrpBx();
     void initInputBx();
     void initMember();
+    void initUserList();
 
 
 public:

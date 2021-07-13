@@ -1,5 +1,36 @@
 #include "serverhandler.h"
 
+QString ServerHandler::getOnlineUserId()
+{
+    QString ret = "";
+
+    for (int i=0; i<m_nodeList.length(); i++) {
+
+        Node* n = m_nodeList.at(i);
+
+        if (n->socket != nullptr){
+            ret += n->id + '\r';
+        }
+
+    }
+
+    return ret;
+}
+
+void ServerHandler::sendToAllOnlineUser(TextMessage &tm)
+{
+    const QByteArray& ba = tm.serialize().toLatin1();
+
+    for (int i=0; i<m_nodeList.length(); i++) {
+        Node* n = (m_nodeList.at(i));
+
+        if( n->socket != nullptr){
+            n->socket->write(ba);
+        }
+
+    }
+}
+
 ServerHandler::ServerHandler()
 {
 
@@ -14,16 +45,7 @@ void ServerHandler::handle(QTcpSocket &obj, TextMessage &message)
 
     if (message.type() == "MSGA") {
 
-        const QByteArray& ba = message.serialize().toLatin1();
-
-        for (int i=0; i<m_nodeList.length(); i++) {
-            Node* n = (m_nodeList.at(i));
-
-            if( n->socket != nullptr){
-                n->socket->write(ba);
-            }
-
-        }
+       sendToAllOnlineUser(message);
     }
 
     if ( message.type() == "CONN") {
@@ -41,6 +63,10 @@ void ServerHandler::handle(QTcpSocket &obj, TextMessage &message)
             }
 
         }
+
+        TextMessage tm("USER",getOnlineUserId());
+
+        sendToAllOnlineUser(tm);
 
     }
 
@@ -89,19 +115,26 @@ void ServerHandler::handle(QTcpSocket &obj, TextMessage &message)
 
             if( pwd == n->pwd){
                 n->socket = &obj;
-                result = "LGOK";
+                result = "LIOK";
             }
 
             else {
-                result = "LGER";
+                result = "LIER";
             }
 
         }
 
         obj.write(TextMessage(result,id).serialize().toLatin1());
 
-    }
+        if (result == "LIOK") {
 
+            TextMessage tm("USER",getOnlineUserId());
+
+            sendToAllOnlineUser(tm);
+
+        }
+
+    }
 
 
 }
