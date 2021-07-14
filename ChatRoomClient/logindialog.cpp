@@ -123,7 +123,15 @@ void LoginDialog::paintEvent(QPaintEvent *)
     // 启用抗锯齿(反走样)
     painter.setRenderHint(QPainter::Antialiasing, true);
     // 指定要绘制的图片（将图片路径替换为有效的图片路径）
-    painter.drawPixmap(65,30,150,150,QPixmap("/data/home/zeki_you/Code/QTCode/QtChatRoomDemo/ChatRoomClient/20180519023426_y58BY.jpeg"));
+
+     if (qrand() % 3 == 0){
+        painter.drawPixmap(65,30,150,150,QPixmap("../QtChatRoomDemo/ChatRoomClient/20180519023426_y58BY.jpeg"));
+     } else if (qrand() % 3 == 1) {
+        painter.drawPixmap(65,30,150,150,QPixmap("../QtChatRoomDemo/ChatRoomClient/4065b43ea8935ace15e47a78b7c79066.jpeg"));
+     } else {
+        painter.drawPixmap(65,30,150,150,QPixmap("../QtChatRoomDemo/ChatRoomClient/7bf8881713bfeaa8adf4a1c9fc0c87dd.jpeg"));
+     }
+
 
 
 }
