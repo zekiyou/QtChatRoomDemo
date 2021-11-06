@@ -1,5 +1,13 @@
 ### Readme
 
+## About Project
+```
+一个利用QTGui和Socket，SQLite 完成的聊天室Demo
+在Server和Client封装了一套句柄来解决Socket数据粘黏问题
+
+```
+
+
 QtChatRoomDemo用于总结和使用一些需要学习的模块，在实际项目中来熟悉和使用
 
 - [x] Git的使用  （已同步至GitLab仓库）
@@ -10,7 +18,6 @@ QtChatRoomDemo用于总结和使用一些需要学习的模块，在实际项目
 - [x] TCP/IP (聊天室基于Socket方式完成信息传送)
 - [x] QSQLITE (用户名密码使用QT+SQLITE来存储)
 - [x] 增加Github的仓库
-
 
 
 QtChatRoomDemo 数据库中默认提供3个用户供以最初登陆使用，登陆过后可以通过admin管理员账号添加新用户
