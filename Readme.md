@@ -4,7 +4,6 @@
 ```
 一个利用QTGui和Socket，SQLite 完成的聊天室Demo
 在Server和Client封装了一套句柄来解决Socket数据粘黏问题
-
 ```
 
 
